@@ -1,0 +1,7 @@
+# build内を無視
+/build
+
+# data内はユーザが好きな点群を入れる。ただしサンプルは添付する
+/data
+!/data/sample_cloud.pcd
+
