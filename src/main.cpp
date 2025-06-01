@@ -4,7 +4,7 @@
 #include <pcl/point_types.h>
 #include <pcl/segmentation/progressive_morphological_filter.h>
 #include <pcl/filters/extract_indices.h> // Added for pcl::ExtractIndices
-// #include <pcl/visualization/pcl_visualizer.h> // Commented out for headless testing
+#include <pcl/visualization/pcl_visualizer.h> // Commented out for headless testing
 #include <pcl/console/parse.h>
 
 // Placeholder for configuration file loading
@@ -53,7 +53,6 @@ int main(int argc, char** argv) {
     std::cout << "Loaded " << cloud->width * cloud->height << " data points from " << file_path << std::endl;
 
     // --- 4. Display original point cloud (Commented out for headless testing) ---
-    /*
     pcl::visualization::PCLVisualizer::Ptr viewer_original(new pcl::visualization::PCLVisualizer("Original Cloud"));
     viewer_original->setBackgroundColor(0, 0, 0);
     pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> original_color(cloud, 255, 255, 255); // White
@@ -66,7 +65,6 @@ int main(int argc, char** argv) {
         viewer_original->spinOnce(100);
     }
     viewer_original->close();
-    */
 
     // --- 5. Apply Progressive Morphological Filter ---
     pcl::PointCloud<pcl::PointXYZ>::Ptr ground(new pcl::PointCloud<pcl::PointXYZ>);
@@ -91,7 +89,6 @@ int main(int argc, char** argv) {
     std::cout << "Ground removal complete. Original points: " << cloud->size() << ", Ground points: " << ground_indices->indices.size() << ", Non-ground points: " << non_ground_cloud->size() << std::endl;
 
     // --- 6. Display filtered point cloud (Commented out for headless testing) ---
-    /*
     pcl::visualization::PCLVisualizer::Ptr viewer_filtered(new pcl::visualization::PCLVisualizer("Filtered Cloud (Non-Ground)"));
     viewer_filtered->setBackgroundColor(0, 0, 0);
     pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> filtered_color(non_ground_cloud, 0, 255, 0); // Green
@@ -104,7 +101,6 @@ int main(int argc, char** argv) {
         viewer_filtered->spinOnce(100);
     }
     viewer_filtered->close();
-    */
 
     // --- 7. Save filtered point cloud ---
     if (non_ground_cloud->points.empty()) {
